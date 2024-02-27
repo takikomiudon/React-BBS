@@ -4,7 +4,7 @@ const Headers = () => {
   return (
     <div>
       <h1>掲示板</h1>
-      <Link to="/threads/create">スレッドをたてる</Link>
+      <Link to="/thread/new">スレッドをたてる</Link>
     </div>
   )
 }
