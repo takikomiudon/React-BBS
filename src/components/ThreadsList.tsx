@@ -9,7 +9,6 @@ const ThreadsList = () => {
     fetch('https://railway.bulletinboard.techtrain.dev/threads')
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setThreads(data)
       })
   }, [threads])
@@ -18,7 +17,7 @@ const ThreadsList = () => {
     <div>
       <h2>スレッド一覧</h2>
       {threads.map((thread) => (
-        <Thread thread={thread} />
+        <Thread thread={thread} key={thread.id} />
       ))}
     </div>
   )

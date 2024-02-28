@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Headers from "../components/Header"
 
 const CreateThread = () => {
   const [title, setTitle] = useState('')
@@ -15,8 +16,11 @@ const CreateThread = () => {
 
   return (
     <div>
-      <input type="text" name="title" placeholder="スレッドのタイトル" value={title} onChange={(e) => setTitle(e.target.value)} />
-      <button type="submit" onClick={handleSubmit}>スレッドをたてる</button>
+      <Headers />
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="title" placeholder="スレッドのタイトル" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <button type="submit">スレッドをたてる</button>
+      </form>
     </div>
   )
 }
