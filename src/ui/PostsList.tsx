@@ -12,33 +12,34 @@ const PostsList = () => {
   const [post, setPost] = useState<string>('');
   const { threadId } = useParams();
 
-  const handleClick = () => {
-    fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`, {
+  const handleClick = async () => {
+    const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`, {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ post: post }),
     })
-    .then(response => response.json())
-    .then(data => {
-      setPost('');
-    });
+    setPost(await response.json());
   }
 
   useEffect(() => {
-    fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`, {
-      method: 'GET', 
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then(response => response.json())
-    .then(data => {
-      setPosts(data.posts);
-    });
+    (async () => {
+      try {
+        const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`, {
+          method: 'GET', 
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        const jsonResponse = await response.json();
+        setPosts(jsonResponse.posts);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   }
-  , [threadId, post]);
+  , [threadId, posts]);
 
   return (
     <div>

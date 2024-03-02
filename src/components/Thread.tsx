@@ -6,7 +6,7 @@ export type ThreadProps = {
 const Thread = ( { thread }: { thread: ThreadProps } ) => {
   return (
     <div>
-      {thread.title}
+      {thread.title} ({thread.id})
     </div>
   )
 }
